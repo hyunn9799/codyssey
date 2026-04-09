@@ -216,3 +216,24 @@ docker exec -it vol-test bash -lc "echo hi > /data/hello.txt && cat /data/hello.
 ## Git 과 GitHub 차이
 Git: 내 컴퓨터에서 버전을 관리하는 도구
 GitHub: Git 저장소를 원격으로 올리고 협업하는 플랫폼
+
+## docker-compose 
+```Bash
+1. 서비스 실행(백그라운드)
+docker-compose up -d
+2. 실행 상태 확인
+컨테이너들이 정상적으로 Up 상태인지 확인
+
+docker-compose ps
+3. 멀티 컨테이너 네트워크 통신 확인 
+helper-service에서 web-server라는 서비스 이름으로 통신이 가능한지 확인
+
+docker-compose exec helper-service ping web-server
+4. 실시간 로그 모니터링
+웹 서버의 접속 로그를 실시간으로 확인
+
+docker-compose logs -f web-server
+5. 전체 서비스 종료 및 삭제
+컨테이너, 네트워크 등 생성된 모든 리소스를 한 번에 정리
+
+docker-compose down
