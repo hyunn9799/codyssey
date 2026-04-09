@@ -197,3 +197,22 @@ http://localhost:8080
 ```bash
 curl http://localhost:8080
 ```
+
+## Docker 볼륨 영속성 검증
+## 볼륨 생성
+```bash
+docker volume create mydata
+```
+
+## 볼륨 연결 컨테이너 실행
+```bash
+docker run -d --name vol-test -v mydata:/data ubuntu sleep infinity
+```
+## 데이터 생성
+```bash
+docker exec -it vol-test bash -lc "echo hi > /data/hello.txt && cat /data/hello.txt"
+```
+
+## Git 과 GitHub 차이
+Git: 내 컴퓨터에서 버전을 관리하는 도구
+GitHub: Git 저장소를 원격으로 올리고 협업하는 플랫폼
