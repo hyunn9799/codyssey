@@ -171,3 +171,29 @@ exec: 실행 중인 컨테이너 내부에서 새 프로세스를 실행
 
 즉, attach는 현재 실행 중인 프로세스에 붙는 개념이고,
 exec는 컨테이너 안에서 추가 명령을 실행하는 방식
+
+## 이미지 빌드
+```bash
+docker build -t my-web:1.0 .
+``
+
+## 컨테이너 실행
+```bash
+docker run -d -p 8080:80 --name my-web my-web:1.0
+```
+
+## 포트 매핑 및 접속 확인
+## 포트 매핑 실행
+```bash
+docker run -d -p 8080:80 --name my-web my-web:1.0
+```
+
+브라우저 접속 주소:
+```bash
+http://localhost:8080
+```
+
+또는 curl 확인:
+```bash
+curl http://localhost:8080
+```
