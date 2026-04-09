@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  # 1. 메인 웹 서버 서비스
+  web-server:
+    image: nginx:alpine
+    ports:
+      - "8080:80"        # 호스트 8080 포트를 컨테이너 80 포트에 연결
+    volumes:
+      - ./app:/usr/share/nginx/html  # 로컬 app 폴더를 컨테이너 내부로 연결 (볼륨)
+    environment:
+      - APP_ENV=dev      # 환경 변수 주입
+    networks:
+      - my-network
+
+  # 2. 보조 서비스 (네트워크 확인용)
+  helper-service:
+    image: alpine
+    command: sleep infinity  # 죽지 않고 계속 실행되게 설정
+    networks:
+      - my-network
+
+networks:
+  my-network:            # 두 컨테이너가 소통할 수 있는 공용 네트워크
+    driver: bridge
