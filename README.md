@@ -211,6 +211,16 @@ docker run -d --name vol-test -v mydata:/data ubuntu sleep infinity
 ## 데이터 생성
 ```bash
 docker exec -it vol-test bash -lc "echo hi > /data/hello.txt && cat /data/hello.txt"
+
+# 1. 기존 컨테이너 삭제 (강제 종료 및 삭제)
+docker rm -f vol-test
+
+# 2. 동일한 볼륨을 마운트하는 새로운 컨테이너 실행
+docker run -d --name vol-test-new -v mydata:/data ubuntu sleep infinity
+
+# 3. 데이터가 그대로 남아있는지 확인 (영속성 증명)
+docker exec -it vol-test-new cat /data/hello.txt
+
 ```
 
 ## Git 과 GitHub 차이
