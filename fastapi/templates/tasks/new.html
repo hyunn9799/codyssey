@@ -8,13 +8,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css?v=2">
 </head>
 <body>
     <div class="container">
-        <h1>새 할 일 작성</h1>
+        <h1>{{ project.name }} - 새 할 일 작성</h1>
 
-        <form method="post" action="/tasks">
+        <form method="post" action="/projects/{{ project.id }}/tasks">
             <div class="form-group">
                 <label for="title">제목</label>
                 <input type="text" id="title" name="title" placeholder="할 일 제목을 입력하세요" required>
@@ -34,7 +34,7 @@
         </form>
 
         <div class="actions-nav">
-            <a href="/tasks" class="btn btn-secondary" style="flex: 1;">목록으로</a>
+            <a href="/projects/{{ project.id }}" class="btn btn-secondary" style="flex: 1;">프로젝트 상세로</a>
         </div>
     </div>
 </body>

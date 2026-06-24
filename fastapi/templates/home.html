@@ -4,33 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ app_name }}</title>
-    <!-- 구글 폰트에서 Noto Sans KR 불러오기 -->
+    <!-- Google Fonts Noto Sans KR -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #f8fafc;
-            color: #334155;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-        a {
-            color: #4f46e5;
-            text-decoration: none;
-            margin-right: 1rem;
-            font-weight: 500;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/css/style.css?v=2">
 </head>
 <body>
-    <h1>{{ app_name }}</h1>
+    <div class="container">
+        <h1>{{ app_name }}</h1>
 
-    <a href="/tasks">할 일 목록 보기</a>
-    <a href="/tasks/new">새 할 일 작성</a>
+        {% if current_user %}
+            <div class="welcome-box">
+                <div class="welcome-info">
+                    <span class="welcome-name">{{ current_user.display_name }}님</span>
+                    <span class="welcome-sub">오늘도 생산적인 하루를 시작해 보세요!</span>
+                </div>
+                <form method="post" action="/logout" style="margin: 0;">
+                    <button type="submit" class="btn btn-secondary" style="padding: 0.5rem 0.85rem; font-size: 0.85rem;">로그아웃</button>
+                </form>
+            </div>
+
+            <div class="home-menu">
+                <a href="/projects" class="menu-card">
+                    <div class="menu-content">
+                        <span class="menu-title">📂 프로젝트 목록</span>
+                        <span class="menu-desc">프로젝트별 진행 상황과 상세 내역을 관리합니다.</span>
+                    </div>
+                    <span class="menu-icon">&rarr;</span>
+                </a>
+
+                <a href="/tasks" class="menu-card">
+                    <div class="menu-content">
+                        <span class="menu-title">📝 모든 할 일 보기</span>
+                        <span class="menu-desc">나에게 할당된 전체 할 일 목록을 한눈에 확인합니다.</span>
+                    </div>
+                    <span class="menu-icon">&rarr;</span>
+                </a>
+
+                <a href="/tasks/new" class="menu-card">
+                    <div class="menu-content">
+                        <span class="menu-title">⚡ 새 할 일 작성</span>
+                        <span class="menu-desc">신속하게 새로운 일정을 등록하고 완료 여부를 추적합니다.</span>
+                    </div>
+                    <span class="menu-icon">&rarr;</span>
+                </a>
+            </div>
+        {% else %}
+            <div class="empty-state" style="padding: 2.5rem 1rem;">
+                <span class="empty-icon" style="animation: none;">🎯</span>
+                <!-- <h2 style="font-size: 1.35rem; margin-bottom: 0.5rem;">생산성 관리를 하나로</h2>
+                <p>프로젝트와 할 일을 체계적으로 정리하여 효율적으로 완료해 보세요.</p> -->
+            </div>
+
+            <div class="actions-nav">
+                <a href="/login" class="btn btn-primary" style="flex: 1; text-align: center;">로그인하러 가기</a>
+            </div>
+        {% endif %}
+    </div>
 </body>
 </html>

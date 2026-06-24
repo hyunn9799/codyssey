@@ -12,7 +12,7 @@ class User(Base):
     display_name = Column(String(50), nullable=False)
 
     projects = relationship(
-        "project",
+        "Project",
         back_populates="user",
         cascade="all, delete-orphan",
     )

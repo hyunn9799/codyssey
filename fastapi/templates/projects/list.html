@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로젝트 목록</title>
+
+    <!-- Google Fonts Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/css/style.css?v=2">
+</head>
+<body>
+    <div class="container">
+        <h1>프로젝트 목록</h1>
+
+        <div class="welcome-box">
+            <div class="welcome-info">
+                <span class="welcome-name">{{ current_user.display_name }}님</span>
+                <span class="welcome-sub">환영합니다!</span>
+            </div>
+
+            <form method="post" action="/logout" style="margin: 0;">
+                <button type="submit" class="btn btn-secondary" style="padding: 0.5rem 0.85rem; font-size: 0.85rem;">
+                    로그아웃
+                </button>
+            </form>
+        </div>
+
+        <div class="actions-nav">
+            <a href="/projects/new" class="btn btn-primary" style="flex: 1;">새 프로젝트 작성</a>
+            <a href="/" class="btn btn-secondary" style="flex: 1;">홈으로</a>
+        </div>
+
+        {% if projects %}
+            <div class="project-grid">
+                {% for project in projects %}
+                    <div class="project-card">
+                        <div class="project-header">
+                            <span class="project-icon">📂</span>
+                            <span class="project-title">{{ project.name }}</span>
+                        </div>
+
+                        {% if project.description %}
+                            <p class="project-desc">{{ project.description }}</p>
+                        {% else %}
+                            <p class="project-desc empty-desc">설명이 등록되지 않았습니다.</p>
+                        {% endif %}
+
+                        <div class="project-footer">
+                            <span class="project-date">
+                                생성일: {{ project.created_at.strftime('%Y-%m-%d') if project.created_at else '지정되지 않음' }}
+                            </span>
+                        </div>
+
+                        <div class="actions-nav">
+                            <a href="/projects/{{ project.id }}" class="btn btn-primary" style="flex: 1;">
+                                상세보기
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <span class="empty-icon">📂</span>
+                <p>아직 등록된 프로젝트가 없습니다.</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

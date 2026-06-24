@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>새 프로젝트 작성</title>
+    <!-- Google Fonts Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css?v=2">
+</head>
+<body>
+    <div class="container">
+        <h1>새 프로젝트 작성</h1>
+
+        <div class="welcome-box" style="margin-bottom: 1.5rem; padding: 0.85rem 1.1rem;">
+            <div class="welcome-info">
+                <span class="welcome-name">{{ current_user.display_name }}님</span>
+                <span class="welcome-sub">새로운 프로젝트 정보를 입력해 주세요.</span>
+            </div>
+        </div>
+
+        <form method="post" action="/projects">
+            <div class="form-group">
+                <label for="name">프로젝트 이름</label>
+                <input type="text" id="name" name="name" placeholder="프로젝트 이름을 입력하세요" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">설명</label>
+                <textarea id="description" name="description" placeholder="프로젝트에 대한 설명을 적어주세요"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">저장</button>
+        </form>
+
+        <div class="actions-nav">
+            <a href="/projects" class="btn btn-secondary" style="flex: 1;">목록으로</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -45,4 +45,12 @@ def login(
         url="/projects",
         status_code=303
     )
-    
+
+@router.post("/logout")
+def logout(request: Request):
+    logout_user(request)
+
+    return RedirectResponse(
+        url="/",
+        status_code=303
+    )

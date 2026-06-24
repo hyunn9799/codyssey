@@ -5,7 +5,7 @@ from database import Base, engine , SessionLocal
 from models.task import Task
 from models.project import Project
 from models.user import User
-from routers import home_router, task_router , auth_router
+from routers import home_router, task_router , auth_router , project_router
 from services.auth_service import create_test_user_if_not_exists
 
 from starlette.middleware.sessions import SessionMiddleware
@@ -27,10 +27,13 @@ def seed_test_user():
     finally:
         db.close()
 
+seed_test_user()
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.include_router(home_router.router)
 app.include_router(auth_router.router)
+app.include_router(project_router.router)
 app.include_router(task_router.router)
 
 
